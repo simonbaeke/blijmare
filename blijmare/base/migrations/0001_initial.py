@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-
+        ("wagtailcore", "0094_alter_page_locale"),
     ]
 
     operations = [
