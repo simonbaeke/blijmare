@@ -10,9 +10,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("home", "0002_create_homepage"),
-        ("wagtailcore", "0094_alter_page_locale"),
-        ("wagtailimages", "0027_image_description"),
+
     ]
 
     operations = [
