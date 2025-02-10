@@ -60,5 +60,6 @@ RUN python manage.py collectstatic --noinput --clear
 CMD set -xe; \
     python manage.py makemigrations --noinput; \
     python manage.py migrate --noinput; \
+    python manage.py create_default_superuser; \
     gunicorn blijmare.wsgi:application
 
