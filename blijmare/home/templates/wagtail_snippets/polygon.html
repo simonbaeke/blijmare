@@ -1,0 +1,10 @@
+{% extends "wagtail_snippets/snippets/base.html" %}
+
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>{{ object.geojson }}</p>
+    <!-- Voeg hier je aangepaste HTML toe -->
+    <div class="custom-class">
+        Dit is een aangepaste HTML-sectie.
+    </div>
+{% endblock %}

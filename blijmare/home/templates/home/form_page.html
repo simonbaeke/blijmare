@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-formpage{% endblock %}
+
+{% block content %}
+    <h1></h1>
+
+        <h2 class="scroll-animation text-4xl font-bold mb-6 neon-text">{{ page.title }}</h2>
+        <p class="scroll-animation text-green-500 mb-6">
+ <div>{{ page.intro|richtext }}</div>
+            Volg ons op Facebook: <a href="https://www.facebook.com/DeBrugseZandfeesten/" class="text-pink-500 hover:underline">https://www.facebook.com/DeBrugseZandfeesten/</a>
+        </p>
+
+
+
+    <form class="page-form" action="{% pageurl page %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="Submit">Submit</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends "wagtailadmin/base.html" %}
+{% load wagtailadmin_tags %}
+{% load static %}
+
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'wagtailadmin/css/core.css' %}">
+<link rel="stylesheet" href="{% static 'wagtailadmin/css/vendor/font-awesome.css' %}">
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+{% include  './admin-header.html' with title='Reservaties' icon="calendar-alt" %}
+{{ reservaties|json_script:"reservaties"}}
+
+<div x-data="adminReservatieAlpine()" class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">Reserveringen</h2>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <template x-for="reservatie in reservaties" :key="reservatie.id">
+                <!-- Card voor elke reservering -->
+                <div class="col12">
+                    <div class="card">
+                        <!-- Card Header -->
+                        <div class="card-header">
+                            <h3 class="card-title" x-text="reservatie.full_name"></h3>
+                            <span class="meta" x-text="reservatie.datum"></span>
+                        </div>
+                        <!-- Card Content: Lijst van standplaatsen -->
+                        <div class="card-content">
+                            <ul class="listing">
+                                <template x-for="standplaats in reservatie.standplaatsen" :key="standplaats.id">
+                                    <li class="row">
+                                        <div class="col9">
+                                            <span x-text="standplaats.naam"></span>
+                                        </div>
+                                        <div class="col3">
+                                            <a href="" @click.prevent="deleteStandplaatsFromReservering(reservatie, standplaats)" class="button button-small button-secondary">
+                                                verwijder uit reservering
+                                            </a>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                        <!-- Card Footer: Verwijderknop voor reservering -->
+                        <div class="card-footer">
+                            <a href="" @click.prevent="deleteReservering(reservatie)" class="button button-small button-secondary">
+                                <span class="icon icon-bin"></span> Verwijder Reservering
+                            </a>
+                        </div>
+                    </div>
+                       <hr class="card-divider">
+                </div>
+            </template>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+{% include  '../js/adminreservatiesalpine.js' %}
+</script>
+
+{% endblock %}

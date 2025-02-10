@@ -1,0 +1,223 @@
+/* 90s retro stijl */
+.custom-label {
+
+    font-size: 12px;
+    color: black;
+    white-space: nowrap;
+}
+
+body {
+    background-color: #000;
+    color: #00FF00; /* Groene tekst, zoals oude monitoren */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Pixelated font voor extra retro gevoel */
+@font-face {
+    font-family: 'Pixel';
+    src: url('https://fonts.cdnfonts.com/s/15011/Pixel.woff') format('woff');
+}
+
+.pixel-font {
+    font-family: 'Pixel', sans-serif;
+}
+
+/* Neon kleuren voor koppen */
+.neon-text {
+    color: #FF00FF; /* Fel roze */
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+}
+
+/* Rasterachtergrond voor de header */
+.header-raster {
+    background: repeating-linear-gradient(
+        45deg,
+        #000,
+        #000 10px,
+        #00FF00 10px,
+        #00FF00 20px
+    );
+}
+
+/* Retro knoppen */
+.retro-button {
+    background-color: #FF00FF;
+    color: #000;
+    border: 2px solid #00FF00;
+    padding: 10px 20px;
+    font-family: 'Pixel', sans-serif;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.retro-button:hover {
+    background-color: #00FF00;
+    color: #FF00FF;
+}
+
+/* Scroll-animaties */
+.scroll-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.scroll-animation.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sticky navbar */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #000;
+    border-bottom: 2px solid #00FF00;
+}
+
+/* Navbar links */
+.nav-link {
+    color: #00FF00;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nav-link:hover {
+    background-color: #00FF00;
+    color: #000;
+}
+
+/* CTA-knop in de header */
+.header-cta {
+
+    z-index: 10;
+}
+
+        /* Container voor de lijst */
+.retro-list-container {
+    background-color: #000; /* Zwarte achtergrond */
+    padding: 20px;
+    border: 2px solid #00FF00; /* Groene rand */
+    margin: 20px 0;
+        height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+/* Titel van de lijst */
+.retro-list-container h2 {
+    font-family: 'Pixel', sans-serif; /* Pixelated font */
+    color: #FF00FF; /* Fel roze */
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Neon effect */
+}
+
+/* Lijst zelf */
+.retro-list {
+    list-style-type: none; /* Verwijder standaard lijststijl */
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-width: thin; /* Dunne scrollbar */
+    scrollbar-color: #00FF00 #000; /* Groene thumb, zwarte track */
+    height: 60%;
+    overflow-y: auto;
+    border: 1px solid #00FF00;
+    padding: 0.5rem;
+}
+
+/* Lijstitems */
+.retro-list-item {
+    font-family: 'Courier New', Courier, monospace; /* Retro monospace font */
+    color: #00FF00; /* Groene tekst */
+    padding: 10px;
+    margin: 5px 0;
+    height: calc(25% - 1rem);
+    background-color: #111; /* Donkergrijze achtergrond */
+    border: 1px solid #00FF00; /* Groene rand */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Soepele overgang */
+}
+
+/* Hover-effect voor lijstitems */
+.retro-list-item:hover {
+    background-color: rgba(0, 256, 0, 0.3); /* Groene achtergrond */
+    color: #000; /* Zwarte tekst */
+    cursor: pointer; /* Verander muiscursor */
+}
+
+.retro-button{
+    font-family: 'Courier New', Courier, monospace; /* Retro monospace font */
+    color: #00FF00; /* Groene tekst */
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #111; /* Donkergrijze achtergrond */
+    border: 1px solid #00FF00; /* Groene rand */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Soepele overgang */
+}
+
+
+.retro-button:disabled{
+    border: rgba(0, 256, 0, 0.2); /* Grijze rand */
+    color: rgba(0, 256, 0, 0.2);
+    pointer-events: none;
+
+}
+
+/* Hover-effect */
+.retro-button:hover {
+    background-color: rgba(0, 256, 0, 0.5); /* Groene achtergrond */
+    color: #000; /* Zwarte tekst */
+    cursor: pointer; /* Verander muiscursor */
+}
+
+
+.retro-button.red{
+    color: #FF0000;
+    margin-right: 0.5rem;
+        border: 1px solid #FF0000; /* Groene rand */
+
+}
+
+.retro-button.red:hover{
+    background-color: rgba(256, 0, 0, 0.5);
+    color: #FF00000;
+}
+
+.retro-list-item .trash {
+    color: #00FF00; /* Roze kleur */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover-effect voor het vuilbak icoon */
+.retro-list-item .trash:hover {
+    color: #FF00FF;/* Groene kleur bij hover */
+}
+
+.swal2-popup {
+    font-family: 'Courier New', Courier, monospace; /* Retro monospace font */
+    background-color: #000; /* Zwarte achtergrond */
+    border: 2px solid #00FF00; /* Groene rand */
+    color: #00FF00; /* Groene tekst */
+    border-radius: none;
+}
+
+.swal2-title {
+    color: #FF00FF; /* Roze titel */
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Neon effect */
+}
+
+.swal2-icon {
+    color: #00FF00; /* Groene iconen */
+}
+
+.swal2-close {
+    color: #00FF00; /* Groene sluitknop */
+}
+
+.swal2-timer-progress-bar {
+    background-color: #00FF00; /* Groene voortgangsbalk */
+}

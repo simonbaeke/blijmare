@@ -1,21 +1,184 @@
 {% extends "base.html" %}
-{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
 
-{% block extra_css %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Brugse Zandfeesten - Antiek & Brocantemarkt</title>
+    <style>
+        /* 90s retro stijl */
+        body {
+            background-color: #000;
+            color: #00FF00; /* Groene tekst, zoals oude monitoren */
+            font-family: 'Courier New', Courier, monospace;
+        }
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
+        /* Pixelated font voor extra retro gevoel */
+        @font-face {
+            font-family: 'Pixel';
+            src: url('https://fonts.cdnfonts.com/s/15011/Pixel.woff') format('woff');
+        }
+
+        .pixel-font {
+            font-family: 'Pixel', sans-serif;
+        }
+
+        /* Neon kleuren voor koppen */
+        .neon-text {
+            color: #FF00FF; /* Fel roze */
+            text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+        }
+
+        /* Rasterachtergrond voor de header */
+        .header-raster {
+            background: repeating-linear-gradient(
+                45deg,
+                #000,
+                #000 10px,
+                #00FF00 10px,
+                #00FF00 20px
+            );
+        }
+
+        /* Retro knoppen */
+        .retro-button {
+            background-color: #FF00FF;
+            color: #000;
+            border: 2px solid #00FF00;
+            padding: 10px 20px;
+            font-family: 'Pixel', sans-serif;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .retro-button:hover {
+            background-color: #00FF00;
+            color: #FF00FF;
+        }
+
+        /* Scroll-animaties */
+        .scroll-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sticky navbar */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #000;
+            border-bottom: 2px solid #00FF00;
+        }
+    </style>
+</head>
 
 {% block content %}
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+<header id="home" class="relative h-96 flex items-center justify-center overflow-hidden header-raster">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-end flex-col">
 
-{% endblock content %}
+        <div class="flex items-center justify-around flex-col" style="height: 66%;">
+            <h1 class="text-6xl md:text-8xl font-bold neon-text text-center">
+                {{ page.hero_title }}
+            </h1>
+
+            <div class=" text-xl header-cta">
+                <a href="{% pageurl page.hero_cta_link %}" class="retro-button">
+                    {% firstof page.hero_cta  page.hero_cta_link.title %}</a>
+            </div>
+            <span class="text-4xl md:text-6xl">
+                    {{ page.hero_subtitle }}
+                </span>
+        </div>
+
+
+        <!-- CTA-knop -->
+
+    </div>
+</header>
+
+
+<!-- Header Banner -->
+
+
+<!-- Cookie Banner -->
+<div id="cookie-banner"
+     class="fixed bottom-0 left-0 right-0 bg-black border-t-2 border-green-500 p-4 flex flex-col md:flex-row items-center justify-between">
+    <p class="text-green-500 text-sm mb-4 md:mb-0">
+        Deze website maakt gebruik van essentiële cookies zodat je een stand kunt reserveren.
+    </p>
+    <div class="flex gap-2">
+        <button id="accept-cookies" class="retro-button">Accepteren</button>
+        <button id="decline-cookies" class="retro-button">Weigeren</button>
+    </div>
+</div>
+
+<!-- Hoofdinhoud -->
+<main class="container mx-auto px-4 py-12">
+    <!-- Introductie -->
+    <section class="mb-12">
+        <h2 class="scroll-animation text-4xl font-bold mb-6 neon-text">De grootste antiek- en brocantemarkt van
+            Vlaanderen!</h2>
+        <p class="scroll-animation text-green-500 mb-6">
+            {{ page.body|richtext }}
+        </p>
+    </section>
+
+    <!-- Inschrijven -->
+    <section class="mb-12">
+        <h2 class="scroll-animation text-4xl font-bold mb-6 neon-text">Inschrijven?</h2>
+        <p class="scroll-animation text-green-500 mb-6">
+            U wenst graag deel te nemen aan de rommmelmarkt? Dat kan!<br>
+            Standhouders die antiek, brocante, curiosa of eigen handgemaakte spullen willen aanbieden zijn zeker welkom!<br>
+        </p>
+        <a href="reserveren.html" target="_blank" class="scroll-animation retro-button">Inschrijven</a>
+    </section>
+
+    <!-- Contact -->
+
+
+</main>
+
+<!-- Script voor scroll-animaties en cookiebanner -->
+<script>
+    // Scroll-animaties
+    document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('.scroll-animation');
+        const onScroll = () => {
+            elements.forEach(element => {
+                if (element.getBoundingClientRect().top < window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // Trigger animatie bij laden
+    });
+
+    // Cookiebanner
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesButton = document.getElementById('accept-cookies');
+    const declineCookiesButton = document.getElementById('decline-cookies');
+
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
+        cookieBanner.style.display = 'none';
+    }
+
+    acceptCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieBanner.style.display = 'none';
+    });
+
+    declineCookiesButton.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'false');
+        cookieBanner.style.display = 'none';
+    });
+</script>
+
+{% endblock %}

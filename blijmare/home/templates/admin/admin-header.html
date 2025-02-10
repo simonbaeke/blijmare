@@ -1,0 +1,19 @@
+{% block header %}
+    <div class="w-header">
+        <div class="w-header__container">
+            <!-- Breadcrumbs -->
+            <div class="w-header__breadcrumbs">
+                <a href="{% url 'wagtailadmin_home' %}" class="w-header__breadcrumb-link">Home</a>
+
+                    <span class="w-header__breadcrumb-divider">/</span>
+                    <a href="" class="w-header__breadcrumb-link">
+                        blabla
+                    </a>
+                    <span class="w-header__breadcrumb-divider">/</span>
+                    <span class="w-header__breadcrumb-current">title</span>
+
+            </div>
+
+            <!-- Wagtail's Default Header Content -->
+         </div>
+    </div>{% endblock%}
