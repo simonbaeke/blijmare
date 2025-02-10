@@ -4,7 +4,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("wagtailcore", "0040_page_draft_title"),
+
     ]
 
     operations = [
