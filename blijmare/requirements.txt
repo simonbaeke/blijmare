@@ -6,7 +6,7 @@ charset-normalizer==3.4.1
 click==8.1.8
 defusedxml==0.7.1
 dj-database-url==2.3.0
-Django==5.1.6
+Django>4.2
 django-filter==24.3
 django-modelcluster==6.4
 django-permissionedforms==0.1
@@ -35,6 +35,6 @@ telepath==0.3.1
 typing_extensions==4.12.2
 urllib3==2.3.0
 uvicorn==0.34.0
-wagtail==6.4
+wagtail>6.2
 wagtailgeowidget==8.2.1
 Willow==1.9.0
