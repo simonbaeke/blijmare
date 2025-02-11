@@ -13,6 +13,8 @@ EXPOSE 8000
 #    command.
 ENV PYTHONUNBUFFERED=1 \
     PORT=8000
+    DATABASE_URL=postgresql://root:eJsFuQBFcKFzLbs8ZxPHHKIyLjRbq828@dpg-culr33jqf0us73di0m00-a/blijmaredb
+
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
