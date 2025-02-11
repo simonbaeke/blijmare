@@ -1,6 +1,6 @@
 anyascii
 asgiref
-beautifulsoup4
+beautifulsoup4<4.13,>=4.8
 certifi
 charset-normalizer
 click
@@ -11,7 +11,7 @@ django-filter
 django-modelcluster
 django-permissionedforms
 django-stubs-ext
-django-taggit
+django-taggit<5.1,>=5.0
 django-tasks
 django-treebeard
 django-webpack-loader
