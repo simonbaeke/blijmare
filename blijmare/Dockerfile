@@ -15,7 +15,6 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8000 \
     DATABASE_URL=postgresql://root:eJsFuQBFcKFzLbs8ZxPHHKIyLjRbq828@dpg-culr33jqf0us73di0m00-a/blijmaredb
 
-
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
     build-essential \
@@ -27,9 +26,11 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
+RUN pip install "gunicorn==20.0.4"
 
 # Install the project requirements.
-
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
@@ -46,6 +47,7 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
+RUN python manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
@@ -56,5 +58,9 @@ USER wagtail
 #   PRACTICE. The database should be migrated manually or using the release
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
-
+CMD set -xe; \
+    python manage.py makemigrations --noinput; \
+    python manage.py migrate --noinput; \
+    python manage.py create_custom_superuser; \
+    gunicorn blijmare.wsgi:application
 
