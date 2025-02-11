@@ -1,0 +1,22 @@
+databases:
+  - name: Blijmaredb
+    plan: free
+    databaseName: blijmaredb
+    user: root
+
+services:
+  - type: web
+    plan: free
+    name: blijmare
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn blijmare.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: postgresql://root:eJsFuQBFcKFzLbs8ZxPHHKIyLjRbq828@dpg-culr33jqf0us73di0m00-a/blijmaredb
+        fromDatabase:
+          name: blijmaredb
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
