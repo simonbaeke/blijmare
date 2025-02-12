@@ -9,7 +9,7 @@ try:
 except ImportError:
     pass
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'your-app.onrender.com').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'blijmare.onrender.com').split(',')
 
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
