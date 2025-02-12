@@ -62,5 +62,5 @@ CMD set -xe; \
     python manage.py makemigrations --noinput; \
     python manage.py migrate --noinput; \
     python manage.py create_custom_superuser; \
-    gunicorn blijmare.wsgi:application
+    gunicorn blijmare.wsgi:application --bind 0.0.0.0:$PORT
 
