@@ -36,7 +36,7 @@ class MapService {
         this.createMapContainer()
 
 
-        this.map = L.map(this.mapContainerId).setView([51.207153391823, 3.1801577098702], 13);
+        this.map = L.map(this.mapContainerId).setView([51.208, 3.180], 17);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors',
             maxZoom: 22
