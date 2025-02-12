@@ -38,3 +38,4 @@ uvicorn
 wagtail
 wagtailgeowidget
 Willow
+whitenoise
