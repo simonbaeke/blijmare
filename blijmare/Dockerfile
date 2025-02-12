@@ -5,7 +5,6 @@ FROM python:3.8.1-slim-buster
 RUN useradd wagtail
 
 # Port used by this container to serve HTTP.
-EXPOSE 8000
 
 # Set environment variables.
 # 1. Force Python stdout and stderr streams to be unbuffered.
@@ -62,5 +61,5 @@ CMD set -xe; \
     python manage.py makemigrations --noinput; \
     python manage.py migrate --noinput; \
     python manage.py create_custom_superuser; \
-    gunicorn blijmare.wsgi:application --bind 0.0.0.0:$PORT
+    gunicorn blijmare.wsgi:application
 
