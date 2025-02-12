@@ -10,6 +10,7 @@ except ImportError:
     pass
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'blijmare.onrender.com').split(',')
+SECRET_KEY = "django-insecure-u(+#a0f5rnv4=np@uwnl0tkn22!ahkq7x@i63z7^eg6cs=q28("
 
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
@@ -21,7 +22,6 @@ DATABASES = {
     )
 }
 
-SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # Media files
