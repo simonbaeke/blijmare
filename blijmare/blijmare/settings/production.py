@@ -21,6 +21,8 @@ DATABASES = {
     )
 }
 
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 # Static files (make sure you run `collectstatic` before deployment)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
