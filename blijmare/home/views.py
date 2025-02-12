@@ -166,6 +166,26 @@ class PolygonAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk=None, format=None):
+        """
+        DELETE: Verwijder een specifieke polygoon op basis van de ID.
+        """
+        if not pk:
+            return Response({"error": "Polygon ID is required for deletion."}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            standplaats = Standplaats.objects.get(pk=pk)
+        except Standplaats.DoesNotExist:
+            return Response({"error": "Polygon not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if standplaats.reservaties.exists():
+            return Response(
+                {"error": "Standplaats kon niet verwijderd worden want er is een reservering"},
+                status=status.HTTP_409_CONFLICT
+            )
+
+        standplaats.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class VerwijderStandplaatsUitReserveringView(APIView):
     def delete(self, request, reservering_id, standplaats_id, format=None):

@@ -35,10 +35,41 @@ function adminStandplaatsAlpine(geojsonFieldId) {
             standplaats.setReservering(false)
         },
 
+        verwijderStandplaats(index){
+            const standplaats = this.standplaatsen[index]
+
+            axios.delete(standplaats.url).then(response => {
+                standplaats.destroy()
+                this.standplaatsen.splice(index, 1)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Standplaats verwijderd!',
+                    text: '',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+            }).catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Fout!',
+                    text: JSON.stringify(error.response?.data?.error) || 'Er is een fout opgetreden.',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+            })
+        },
+
         standplaatsCreated(e){
             console.log('standplaatscreated')
             const layer = e.layer
             const geoJson = layer.toGeoJSON();
+            layer.remove()
 //            this.mapService.destroyLayer(layer)
             this.api.savePolygon(geoJson)
             .then((savedPolygon) => {

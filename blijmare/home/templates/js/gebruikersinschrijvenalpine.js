@@ -1,3 +1,25 @@
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Zoek de cookie met de opgegeven naam
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+window.addEventListener('load', () =>{
+    const csrfToken = getCookie('csrftoken');
+    axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+})
+
 function gebruikersInschrijvenAlpine(geojsonFieldId) {
     return {
         setCenterMode: false,
@@ -67,7 +89,7 @@ function gebruikersInschrijvenAlpine(geojsonFieldId) {
                 });
             })
             .catch(error => {
-             Swal.fire({
+                Swal.fire({
                     icon: 'error',
                     title: 'Fout!',
                     text: JSON.stringify(error.response?.data?.message) || 'Er is een fout opgetreden.',

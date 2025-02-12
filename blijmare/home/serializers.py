@@ -5,15 +5,20 @@ from .models import Standplaats, Reservering
 class StandplaatsSerializer(serializers.ModelSerializer):
     heeft_reservering = serializers.SerializerMethodField()
     delete_from_reservation_url = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
     reservering = serializers.SerializerMethodField()
 
     class Meta:
         model = Standplaats
-        fields = ['id', 'naam', 'geojson', 'gebied', 'heeft_reservering', 'reservering', 'delete_from_reservation_url']
+        fields = ['id', 'naam', 'geojson', 'gebied', 'heeft_reservering', 'reservering', 'delete_from_reservation_url', 'url']
         extra_kwargs = {
             'naam': {'required': False},
             'id': {'required': False},
         }
+
+    def get_url(self, obj):
+        return reverse('polygon-detail', kwargs={'pk': obj.pk})
+
 
     def get_delete_from_reservation_url(self, obj):
         if not obj.reservaties.count():

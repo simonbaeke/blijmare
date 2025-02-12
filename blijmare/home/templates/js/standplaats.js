@@ -7,12 +7,13 @@ class Reservering{
         this.familienaam = familienaam
         this.standplaatsen = standplaatsen
         this.fullName = this.voornaam + " " + this.familienaam
+
     }
 }
 
 class Standplaats{
     constructor(json, map){
-        const { naam, geojson, id, heeft_reservering , reservering} = json
+        const { naam, geojson, id, heeft_reservering , reservering, url} = json
         this.geojsonObject = L.geoJSON(JSON.parse(geojson), {color: 'green'})
         this.markers = []
         this.geojsonObject.addTo(map)
@@ -22,7 +23,7 @@ class Standplaats{
         this.id = id
         this.heeftReservering = false
         this.delete_from_reservation_url = json.delete_from_reservation_url
-
+        this.url  = url
         if ( json.reservering === null ) return
         this.reservering = new Reservering(json.reservering)
     }
@@ -59,6 +60,10 @@ class Standplaats{
     }
 
     destroy(){
-
+        if (this.geojsonObject) {
+            this.geojsonObject.remove();
+            this.markers.forEach( m => m.remove())
+            this.geojsonObject = null; // Optioneel: reset de variabele
+        }
     }
 }
