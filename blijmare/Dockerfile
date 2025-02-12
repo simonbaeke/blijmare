@@ -43,18 +43,14 @@ COPY --chown=wagtail:wagtail . .
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
-RUN chown wagtail:wagtail /app/staticfiles
+RUN mkdir -p /app/staticfiles
 
 
 # Collect static files.
 RUN python manage.py collectstatic --noinput --clear \
 
 
-docker run web python manage.py collectstatic
 
-docker exec -it <container_id> bash \
-cd /app/staticfiles  # or the path where your static files are collected \
-ls
 
 
 # Runtime command that executes when "docker run" is called, it does the
