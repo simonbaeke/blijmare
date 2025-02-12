@@ -48,14 +48,19 @@ class MapService {
 
     initControls(){
          this.map.pm.addControls({
-          position: 'topleft',
-          drawMarker: false,
-          drawCircle: false,
-          drawPolyline: false,
-          drawRectangle: false,
-          drawCircleMarker: false,
+            position: 'topleft',
+            drawMarker: false,
+            drawCircle: false,
+            drawPolyline: false,
+            drawRectangle: false,
+            drawCircleMarker: false,
+            drawText: false,
+            editMode: false,         // Geen bewerkingsmodus (edit)
+            removalMode: false,      // Geen gummodus (remove)
+            cutPolygon: false,
+              dragMode: false,         // Geen drag (slepen) tool
+            rotateMode: false
         });
-
     }
 
 
