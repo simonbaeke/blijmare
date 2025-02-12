@@ -9,6 +9,9 @@ try:
 except ImportError:
     pass
 
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'your-app.onrender.com').split(',')
+
+
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': dj_database_url.config(
@@ -17,3 +20,19 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
+# Static files (make sure you run `collectstatic` before deployment)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Security settings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
