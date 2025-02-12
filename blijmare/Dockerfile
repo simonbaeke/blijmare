@@ -43,7 +43,6 @@ COPY --chown=wagtail:wagtail . .
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
-RUN mkdir -p /app/staticfiles
 
 
 # Collect static files.
